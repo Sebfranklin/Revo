@@ -15,8 +15,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-        // Ensure tables exist. This is a good place to centralize schema setup.
-        // Vercel Postgres is smart and won't re-create tables if they exist.
+        // --- Schema Setup (Ensures tables exist on first run) ---
         await sql`
             CREATE TABLE IF NOT EXISTS reviews (
                 id SERIAL PRIMARY KEY,
@@ -27,18 +26,9 @@ module.exports = async (req, res) => {
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
             );
         `;
-        await sql`
-            CREATE TABLE IF NOT EXISTS conversations (
-                id SERIAL PRIMARY KEY,
-                user_id VARCHAR(255) NOT NULL,
-                role VARCHAR(50) NOT NULL, -- 'user' or 'model'
-                parts JSONB NOT NULL, -- Stores the [{ "text": "..." }] structure
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-            );
-        `;
-
+        
         if (req.method === 'GET') {
-            // Fetch all reviews with a rating of 3 or higher
+            // Fetch all reviews with a rating of 3 or higher (Only published reviews)
             const { rows: reviews } = await sql`
                 SELECT id, name, company, rating, text, created_at as "createdAt"
                 FROM reviews
@@ -50,19 +40,27 @@ module.exports = async (req, res) => {
 
         if (req.method === 'POST') {
             const { name, company, rating, text: reviewText } = req.body;
+            const parsedRating = parseInt(rating, 10);
 
-            // Validate required fields
-            if (!name || !rating || !reviewText) {
-                return res.status(400).json({ error: 'Name, rating, and review text are required.' });
+            // 1. Validate required fields
+            if (!name || isNaN(parsedRating) || parsedRating < 1 || parsedRating > 5 || !reviewText) {
+                return res.status(400).json({ error: 'Name, a valid rating (1-5), and review text are required.' });
             }
 
-            // Insert the new review into the database
+            // 2. Insert the review (always save all feedback)
             await sql`
                 INSERT INTO reviews (name, company, rating, text)
-                VALUES (${name}, ${company}, ${rating}, ${reviewText});
+                VALUES (${name}, ${company}, ${parsedRating}, ${reviewText});
             `;
 
-            return res.status(201).json({ message: 'Thank you for your review! It has been submitted successfully.' });
+            // 3. Check rating to determine the user-facing message
+            if (parsedRating >= 3) {
+                // Positive/Neutral reviews are "published" (via the GET filter)
+                return res.status(201).json({ message: 'Thank you for your review! It has been submitted successfully.' });
+            } else {
+                // Negative reviews are saved for internal review but not publicly displayed
+                return res.status(201).json({ message: 'Thank you for your feedback. It has been submitted for internal review by our team.' });
+            }
         }
 
         // Handle unsupported methods
