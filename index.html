@@ -200,6 +200,15 @@ body:not(.tour-active) .interactive-btn {
     transform: translateY(0);
 }
 
+        /* Review Slideshow Animation */
+        .review-slide {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -249,6 +258,133 @@ body:not(.tour-active) .interactive-btn {
                 <a href="#services" class="hover:text-blue-500 transition-colors">Services</a>
                 <a href="#portfolio" class="hover:text-blue-500 transition-colors">Portfolio</a>
                 <a href="#why-us" class="hover:text-blue-500 transition-colors">Why Us</a>
+                <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://wa.me/2347042998527" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-gray-700/50 text-green-500 hover:text-green-400 transition-colors" aria-label="Chat on WhatsApp">
+                    <i data-lucide="message-square"></i>
+                </a>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700/50">
+                    <i data-lucide="sun" class="hidden"></i>
+                    <i data-lucide="moon"></i>
+                </button>
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-700/50"><i data-lucide="menu"></i></button>
+            </div>
+        </nav>
+    </header>
+    
+ 
+    <!-- Mobile Menu -->
+<div id="mobile-menu" class="p-8 md:hidden">
+    <div class="flex flex-col space-y-6 text-left">
+        <a href="#home" class="hover:text-blue-500 transition-colors py-2 text-lg">Home</a>
+        <a href="#services" class="hover:text-blue-500 transition-colors py-2 text-lg">Services</a>
+        <a href="#portfolio" class="hover:text-blue-500 transition-colors py-2 text-lg">Portfolio</a>
+        <a href="#why-us" class="hover:text-blue-500 transition-colors py-2 text-lg">Why Us</a>
+        <a href="#contact" class="hover:text-blue-500 transition-colors py-2 text-lg">Contact</a>
+    </div>
+</div>
+<div id="mobile-menu-backdrop" class="md:hidden"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-16">
+            <div class="absolute inset-0 hero-grid-pattern"></div>
+            <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter hero-headline">Websites That <span class="gradient-text">Win Clients</span></h1>
+                <p class="text-xl md:text-2xl font-bold mb-6 hero-subheadline">Delivered within 5 Days.</p>
+                <p class="max-w-3xl mx-auto text-lg text-[var(--text-secondary)] mb-10">We build high-converting websites for service businesses that generate leads and build trust with your potential clients.</p>
+                <a href="#contact" class="btn-primary text-lg">Get Your Website</a>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20 text-left">
+                    <div class="card">
+                        <i data-lucide="rocket" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
+                        <p class="text-[var(--text-secondary)]">Your complete website ready within just 5 business days.</p>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="target" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Lead-Focused Design</h3>
+                        <p class="text-[var(--text-secondary)]">Optimized to convert visitors into paying customers.</p>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="trending-up" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">SEO Optimized</h3>
+                        <p class="text-[var(--text-secondary)]">Built to rank higher in Google search results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Our Services</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-[var(--text-secondary)] mt-4">We specialize in creating websites that generate leads and build trust for service-based businesses.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card">
+                        <i data-lucide="gem" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Premium Design</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Eye-catching, professional designs that reflect your brand's quality and build instant trust.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="layout-template" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Strategic Structure</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Conversion-focused layouts that guide visitors toward becoming leads and customers.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="search" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">SEO Foundation</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Built-in search engine optimization to help your business get found by local customers.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="headphones" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">AI Customer Service</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Intelligent chatbots and virtual assistants that handle customer inquiries 24/7, improving satisfaction and reducing response times.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="settings" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Productivity Gem Setup</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Custom implementation of productivity tools and automation gems that streamline your business operations and boost efficiency.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="life-buoy" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Ongoing Support</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Reliable technical support and website maintenance to keep your site running smoothly.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+              <a href="#why-us" class="hover:text-blue-500 transition-colors">Why Us</a>
                 <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
             </div>
             <div class="flex items-center space-x-4">
