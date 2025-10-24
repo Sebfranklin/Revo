@@ -272,6 +272,126 @@ document.addEventListener('DOMContentLoaded', () => {
             tl.to(sCards[3], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 48.7);
         }
         tl.to('#ai-chat-toggle', { x: -5, duration: 0.1, yoyo: true, repeat: 9 }, 49);
+     jects a', { opacity: 1, boxShadow: '0 0 40px rgba(59,130,246,1)', scale: 1.1, duration: 1 }, 114);
+            tl.to(window, { duration: 1, scrollTo: { y: '#contact', offsetY: 80 }, ease: 'power2.inOut' }, 115);
+        }
+        const cStart = sp ? 116 : 105;
+        tl.call(() => typeElement('#contact h2', 4000), null, cStart);
+        tl.to(window, { duration: 6, scrollTo: { y: '#contact form', offsetY: 200 }, ease: 'power1.inOut' }, cStart + 4);
+        tl.fromTo('#contact form, #contact .card', { opacity: 0 }, { opacity: 1, boxShadow: '0 0 25px rgba(59,130,246,0.5)', duration: 2 }, cStart + 5);
+        tl.to('#contact button[type="submit"]', { boxShadow: '0 0 30px rgba(59,130,246,1)', scale: 1.05, duration: 0.5, yoyo: true, repeat: 7 }, cStart + 10);
+        tl.to(window, { duration: 3, scrollTo: { y: 'footer', offsetY: 0 }, ease: 'power2.inOut' }, cStart + 14);
+        tl.to('footer a:first-child', { opacity: 1, scale: 1.1, duration: 1, yoyo: true, repeat: 1 }, cStart + 15);
+    }
+
+    function buildTabletTimeline(tl) {
+        tl.fromTo('nav a:first-child', { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 2 }, 0);
+        tl.fromTo('.hidden.md\\:flex a', { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.15 }, 2);
+        tl.call(() => typeElement('h1.hero-headline', 5000), null, 6);
+        tl.fromTo('.hero-subheadline', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 2 }, 11);
+        tl.fromTo('p.max-w-3xl', { opacity: 0 }, { opacity: 1, duration: 1 }, 13);
+        tl.fromTo('#home .card', { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.4, duration: 0.8 }, 13);
+        tl.to('#home .card', { y: -20, boxShadow: '0 0 30px rgba(59,130,246,0.8)', duration: 0.8, stagger: 0.4, yoyo: true, repeat: 1 }, 13.5);
+        tl.to('a.btn-primary', { opacity: 1, boxShadow: '0 0 40px rgba(59,130,246,1)', scale: 1.08, duration: 0.5, yoyo: true, repeat: 3 }, 17);
+        tl.to(window, { duration: 3, scrollTo: { y: '#services', offsetY: 70 }, ease: 'power2.inOut' }, 19);
+        tl.fromTo('#services h2, #services p.text-lg', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 }, 22);
+        const sCards = gsap.utils.toArray('#services .card');
+        if (sCards[0]) {
+            tl.call(() => smartScroll(sCards[0], 120), null, 22.5);
+            tl.fromTo(sCards[0], { opacity: 0 }, { opacity: 1, duration: 0.8 }, 23);
+            tl.to(sCards[0], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 23.5);
+            tl.to(sCards[0], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 25.5);
+        }
+        if (sCards[1]) {
+            tl.call(() => smartScroll(sCards[1], 120), null, 26);
+            tl.fromTo(sCards[1], { opacity: 0 }, { opacity: 1, duration: 0.8 }, 27);
+            tl.to(sCards[1], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 27.5);
+            tl.to(sCards[1], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 31.5);
+        }
+        if (sCards[2]) {
+            tl.call(() => smartScroll(sCards[2], 120), null, 32);
+            tl.fromTo(sCards[2], { opacity: 0 }, { opacity: 1, duration: 0.8 }, 33);
+            tl.to(sCards[2], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 33.5);
+            tl.to(sCards[2], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 38.5);
+        }
+        if (sCards[3]) {
+            tl.call(() => smartScroll(sCards[3], 120), null, 40);
+            tl.fromTo(sCards[3], { opacity: 0 }, { opacity: 1, duration: 0.8 }, 41);
+            tl.to(sCards[3], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 41.5);
+            tl.to(sCards[3], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 48.5);
+        }
+        tl.to('#ai-chat-toggle', { x: -5, duration: 0.1, yoyo: true, repeat: 9 }, 49);
+        if (sCards[4]) tl.fromTo(sCards[4], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 52);
+        if (sCards[5]) tl.fromTo(sCards[5], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 52.5);
+        tl.to('#services .card', { boxShadow: '0 0 25px rgba(59,130,246,0.6)', duration: 0.3, stagger: 0.2, yoyo: true, repeat: 1 }, 53);
+        if (sCards[0]) {
+            tl.call(() => smartScroll(sCards[0], 150), null, 66);
+            const btns = sCards[0].querySelectorAll('.interactive-btn');
+            tl.fromTo(btns, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, stagger: 0.15, ease: 'back.out' }, 67);
+            tl.to(btns, { opacity: 0, duration: 0.5 }, 72);
+        }
+        tl.to('#audio-toggle', { boxShadow: '0 0 30px rgba(59,130,246,0.9)', scale: 1.15, duration: 0.5, yoyo: true, repeat: 5 }, 78);
+        tl.to(window, { duration: 3, scrollTo: { y: '#process-timeline', offsetY: 70 }, ease: 'power2.inOut' }, 82);
+        tl.call(() => typeElement('#process-timeline h3', 4000), null, 86);
+        const steps = gsap.utils.toArray('#process-timeline .bg-blue-500');
+        steps.forEach((step, i) => {
+            tl.to(step, { opacity: 1, boxShadow: '0 0 20px rgba(59,130,246,1)', scale: 1.2, duration: 0.5 }, 90 + i * 2);
+        });
+        tl.to(steps, { opacity: 0.3, duration: 0.2, stagger: 0.3, yoyo: true, repeat: 1 }, 98);
+        const sp = document.getElementById('special-projects');
+        tl.to(window, { duration: 1, scrollTo: { y: sp ? '#special-projects' : '#contact', offsetY: 70 }, ease: 'power2.inOut' }, 104);
+        if (sp) {
+            tl.call(() => typeElement('#special-projects h2', 2000), null, 105);
+            tl.fromTo('#special-projects p', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 2 }, 107);
+            tl.to('#special-projects a', { opacity: 1, boxShadow: '0 0 40px rgba(59,130,246,1)', borderColor: '#3B82F6', scale: 1.1, duration: 1 }, 114);
+            tl.to(window, { duration: 1, scrollTo: { y: '#contact', offsetY: 70 }, ease: 'power2.inOut' }, 115);
+        }
+        const cStart = sp ? 116 : 105;
+        tl.call(() => typeElement('#contact h2', 4000), null, cStart);
+        tl.to(window, { duration: 6, scrollTo: { y: '#contact form', offsetY: 200 }, ease: 'power1.inOut' }, cStart + 4);
+        tl.fromTo('#contact form, #contact .card', { opacity: 0 }, { opacity: 1, boxShadow: '0 0 25px rgba(59,130,246,0.5)', duration: 2 }, cStart + 5);
+        tl.to('#contact button[type="submit"]', { boxShadow: '0 0 35px rgba(59,130,246,1)', scale: 1.08, duration: 0.5, yoyo: true, repeat: 7 }, cStart + 10);
+        tl.to(window, { duration: 2, scrollTo: { y: 'footer', offsetY: 0 }, ease: 'power2.inOut' }, cStart + 14);
+        tl.to('footer a:first-child', { opacity: 1, scale: 1.15, duration: 0.8, yoyo: true, repeat: 1 }, cStart + 15);
+    }
+
+    function buildDesktopTimeline(tl) {
+        tl.fromTo('nav a:first-child', { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 2 }, 0);
+        tl.fromTo('.hidden.md\\:flex a', { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, stagger: 0.15 }, 2);
+        tl.call(() => typeElement('h1.hero-headline', 5000), null, 6);
+        tl.fromTo('.hero-subheadline', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 2 }, 11);
+        tl.fromTo('p.max-w-3xl', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1 }, 13);
+        tl.fromTo('#home .card', { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.4, duration: 0.8 }, 13);
+        tl.to('#home .card', { y: -20, boxShadow: '0 0 30px rgba(59,130,246,0.8)', duration: 0.8, stagger: 0.4, yoyo: true, repeat: 1 }, 13.5);
+        tl.to('a.btn-primary', { opacity: 1, boxShadow: '0 0 40px rgba(59,130,246,1)', scale: 1.08, duration: 0.5, yoyo: true, repeat: 3 }, 17);
+        tl.to(window, { duration: 3, scrollTo: { y: '#services', offsetY: 70 }, ease: 'power2.inOut' }, 19);
+        tl.fromTo('#services h2, #services p.text-lg', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1 }, 22);
+        const sCards = gsap.utils.toArray('#services .card');
+        if (sCards[0]) {
+            tl.fromTo(sCards[0], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 22);
+            tl.to(sCards[0], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 23);
+            tl.fromTo(sCards[0].querySelector('i'), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 23);
+            tl.to(sCards[0], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 25.7);
+        }
+        if (sCards[1]) {
+            tl.fromTo(sCards[1], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 26);
+            tl.to(sCards[1], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 27);
+            tl.fromTo(sCards[1].querySelector('i'), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 27);
+            tl.to(sCards[1], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 31.7);
+        }
+        if (sCards[2]) {
+            tl.fromTo(sCards[2], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 32);
+            tl.to(sCards[2], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 33);
+            tl.fromTo(sCards[2].querySelector('i'), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 33);
+            tl.to(sCards[2], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 39.7);
+        }
+        if (sCards[3]) {
+            tl.fromTo(sCards[3], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 40);
+            tl.to(sCards[3], { boxShadow: '0 0 30px rgba(59,130,246,0.7)', borderColor: '#3B82F6', duration: 0.5 }, 41);
+            tl.fromTo(sCards[3].querySelector('i'), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 41);
+            tl.to(sCards[3], { boxShadow: 'none', borderColor: 'var(--border-color)', duration: 0.3 }, 48.7);
+        }
+        tl.to('#ai-chat-toggle', { x: -5, duration: 0.1, yoyo: true, repeat: 9 }, 49);
         if (sCards[4]) tl.fromTo(sCards[4], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 52);
         if (sCards[5]) tl.fromTo(sCards[5], { opacity: 0 }, { opacity: 1, duration: 0.5 }, 52.5);
         tl.to('#services .card', { boxShadow: '0 0 25px rgba(59,130,246,0.6)', duration: 0.3, stagger: 0.2, yoyo: true, repeat: 1 }, 53);
