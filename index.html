@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trixel Technologies - Websites That Win Clients</title>
+    <meta name="description" content="We build high-converting websites for service businesses that generate leads and build trust with your potential clients. Delivered within 5 Days.">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@600;700;800&display=swap" rel="stylesheet">
+
+   
+<!-- GSAP Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<!-- GSAP ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<!-- GSAP ScrollToPlugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --bg-primary: #0D1117;
+            --bg-card: #161B22;
+            --border-color: #30363D;
+            --text-primary: #F0F6FC;
+            --text-secondary: #8B949E;
+        }
+
+        .light-theme {
+            --bg-primary: #F0F6FC;
+            --bg-card: #FFFFFF;
+            --border-color: #D0D7DE;
+            --text-primary: #0D1117;
+            --text-secondary: #57606A;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lexend', sans-serif;
+            color: var(--text-primary);
+        }
+        .glass-morphism {
+            background: rgba(22, 27, 34, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .light-theme .glass-morphism {
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            @apply px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300;
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+                
+/* Special rule ONLY for the chat send button — ensures circular icon alignment */
+#chat-input-form .btn-primary {
+    width: 2.5rem;             /* circular size for chat send */
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;                /* remove padding so icon is centered */
+    border-radius: 9999px;     /* fully round */
+}
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+        }
+        
+        .btn-secondary {
+            @apply px-6 py-3 rounded-lg font-semibold border border-blue-500 text-blue-500 transition-all duration-300;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .card {
+            @apply bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl p-6 transition-all duration-300 flex flex-col;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            border-color: #3B82F6;
+        }
+        .hero-grid-pattern {
+            background-image: linear-gradient(rgba(13, 17, 23, 0) 1px, var(--bg-primary) 1px), linear-gradient(90deg, rgba(13, 17, 23, 0) 1px, var(--bg-primary) 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%);
+        }
+        .form-input {
+            @apply w-full bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)];
+        }
+        .light-theme .form-input {
+            color: var(--text-primary);
+        }
+        .light-theme select.form-input {
+            color: var(--text-primary);
+        }
+        #back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+    #mobile-menu {
+    @apply fixed top-0 right-0 h-screen w-64 bg-[var(--bg-card)] z-50;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+}
+#mobile-menu.active {
+    transform: translateX(0);
+}
+#mobile-menu-backdrop {
+    @apply fixed inset-0 bg-black/50 z-40;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+#mobile-menu-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+        .interactive-btn {
+            @apply px-3 py-1 rounded-md text-sm transition-all duration-200;
+        }
+        .interactive-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .no-scroll {
+            overflow: hidden !important;
+        }
+
+        .star-rating {
+            @apply flex items-center justify-center gap-1 mb-4;
+        }
+        .star-rating svg {
+            @apply w-8 h-8 cursor-pointer transition-colors duration-200;
+            color: var(--border-color);
+        }
+        .star-rating svg:hover,
+        .star-rating svg.hovered {
+            color: #FBBF24; /* A lighter gold for hover */
+        }
+        .star-rating svg.selected {
+            color: #F59E0B; /* The final selected gold */
+        }
+        
+        /* Mobile Hero Spacing Fix */
+        @media (max-width: 640px) {
+            #home {
+                padding-top: 5rem !important;
+            }
+            h1.hero-headline {
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            }
+        
+      /* Tour-specific styles */
+.tour-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.tour-element {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Hide interactive buttons initially for tour */
+.interactive-btn {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+/* Show buttons when tour is complete or skipped */
+body:not(.tour-active) .interactive-btn {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+        /* Review Slideshow Animation */
+        .review-slide {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Tour Interaction Blocker -->
+    <div id="tour-blocker" class="fixed inset-0 z-[100] hidden" style="background-color: rgba(0,0,0,0.4);"></div>
+
+    <!-- Welcome Overlay -->
+    <div id="welcome-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-500 opacity-0">
+        <div id="welcome-card" class="bg-card border border-border-color rounded-2xl shadow-2xl w-[90%] max-w-4xl flex flex-col md:flex-row overflow-hidden transform scale-95 opacity-0">
+            <!-- Left side with illustration -->
+            <div class="hidden md:flex md:w-1/2 items-center justify-center p-8 bg-blue-900/20">
+                <div class="text-center">
+                    <i data-lucide="bot" class="w-32 h-32 text-blue-400 mx-auto mb-6"></i>
+                    <h2 class="text-3xl font-bold text-text-primary">Meet Your AI Guide</h2>
+                    <p class="text-text-secondary mt-2">Ready to explore the future of web tech?</p>
+                </div>
+            </div>
+            <!-- Right side with content -->
+            <div class="w-full md:w-1/2 p-8 md:p-12 text-center md:text-left">
+                <h2 class="text-4xl lg:text-5xl font-extrabold mb-3 gradient-text">Welcome!</h2>
+                <p class="text-text-secondary text-lg mb-8">
+                    We've crafted a unique, AI-enhanced experience for you. Take a quick tour to see how we can help your business, or jump right in.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <button id="start-tour-btn" class="btn-primary w-full sm:w-auto flex items-center justify-center gap-2">
+                        <i data-lucide="play-circle" class="w-5 h-5"></i>
+                        Start Guided Tour
+                    </button>
+                    <button id="explore-btn" class="btn-secondary w-full sm:w-auto">Explore Freely</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tour Progress Indicator -->
+    <div id="tour-progress" class="fixed top-5 right-5 z-[101] hidden">
+        <button id="skip-tour-btn" class="btn-secondary py-2 px-4 text-sm bg-card hover:bg-border-color">Skip Tour</button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-morphism h-16">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full">
+            <a href="#" class="text-2xl font-bold">Trixel<span class="text-blue-500">.</span>Tech</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="hover:text-blue-500 transition-colors">Home</a>
+                <a href="#services" class="hover:text-blue-500 transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-blue-500 transition-colors">Portfolio</a>
+                <a href="#why-us" class="hover:text-blue-500 transition-colors">Why Us</a>
+                <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://wa.me/2347042998527" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full hover:bg-gray-700/50 text-green-500 hover:text-green-400 transition-colors" aria-label="Chat on WhatsApp">
+                    <i data-lucide="message-square"></i>
+                </a>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700/50">
+                    <i data-lucide="sun" class="hidden"></i>
+                    <i data-lucide="moon"></i>
+                </button>
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-700/50"><i data-lucide="menu"></i></button>
+            </div>
+        </nav>
+    </header>
+    
+ 
+    <!-- Mobile Menu -->
+<div id="mobile-menu" class="p-8 md:hidden">
+    <div class="flex flex-col space-y-6 text-left">
+        <a href="#home" class="hover:text-blue-500 transition-colors py-2 text-lg">Home</a>
+        <a href="#services" class="hover:text-blue-500 transition-colors py-2 text-lg">Services</a>
+        <a href="#portfolio" class="hover:text-blue-500 transition-colors py-2 text-lg">Portfolio</a>
+        <a href="#why-us" class="hover:text-blue-500 transition-colors py-2 text-lg">Why Us</a>
+        <a href="#contact" class="hover:text-blue-500 transition-colors py-2 text-lg">Contact</a>
+    </div>
+</div>
+<div id="mobile-menu-backdrop" class="md:hidden"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-16">
+            <div class="absolute inset-0 hero-grid-pattern"></div>
+            <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter hero-headline">Websites That <span class="gradient-text">Win Clients</span></h1>
+                <p class="text-xl md:text-2xl font-bold mb-6 hero-subheadline">Delivered within 5 Days.</p>
+                <p class="max-w-3xl mx-auto text-lg text-[var(--text-secondary)] mb-10">We build high-converting websites for service businesses that generate leads and build trust with your potential clients.</p>
+                <a href="#contact" class="btn-primary text-lg">Get Your Website</a>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20 text-left">
+                    <div class="card">
+                        <i data-lucide="rocket" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
+                        <p class="text-[var(--text-secondary)]">Your complete website ready within just 5 business days.</p>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="target" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Lead-Focused Design</h3>
+                        <p class="text-[var(--text-secondary)]">Optimized to convert visitors into paying customers.</p>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="trending-up" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">SEO Optimized</h3>
+                        <p class="text-[var(--text-secondary)]">Built to rank higher in Google search results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Our Services</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-[var(--text-secondary)] mt-4">We specialize in creating websites that generate leads and build trust for service-based businesses.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card">
+                        <i data-lucide="gem" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Premium Design</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Eye-catching, professional designs that reflect your brand's quality and build instant trust.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="layout-template" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Strategic Structure</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Conversion-focused layouts that guide visitors toward becoming leads and customers.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="search" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">SEO Foundation</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Built-in search engine optimization to help your business get found by local customers.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="headphones" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">AI Customer Service</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Intelligent chatbots and virtual assistants that handle customer inquiries 24/7, improving satisfaction and reducing response times.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="settings" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Productivity Gem Setup</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Custom implementation of productivity tools and automation gems that streamline your business operations and boost efficiency.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="life-buoy" class="w-8 h-8 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Ongoing Support</h3>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Reliable technical support and website maintenance to keep your site running smoothly.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 bg-[var(--bg-card)] border-y border-[var(--border-color)]">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Our Recent Work</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-[var(--text-secondary)] mt-4">See how we can help service businesses attract more clients with strategic web design.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card overflow-hidden p-0">
+                        <img src="https://via.placeholder.com/400x250/1a202c/808080?text=Elite+Roofing" alt="Elite Roofing Solutions" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold">Elite Roofing Solutions</h3>
+                            <p class="text-[var(--text-secondary)] mb-4">Roofing Services Website</p>
+                        </div>
+                    </div>
+                    <div class="card overflow-hidden p-0">
+                        <img src="https://via.placeholder.com/400x250/1a202c/808080?text=AirTech+Pro" alt="AirTech Pro" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold">AirTech Pro</h3>
+                            <p class="text-[var(--text-secondary)] mb-4">HVAC Services Website</p>
+                        </div>
+                    </div>
+                    <div class="card overflow-hidden p-0">
+                        <img src="https://via.placeholder.com/400x250/1a202c/808080?text=GreenScape+Pro" alt="GreenScape Pro" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold">GreenScape Pro</h3>
+                            <p class="text-[var(--text-secondary)] mb-4">Landscaping Services Website</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us Section -->
+        <section id="why-us" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Why Choose Trixel</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-[var(--text-secondary)] mt-4">We understand the unique needs of service businesses and build websites that actually work for you.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex-shrink-0 flex items-center justify-center mr-4"><i data-lucide="zap" class="w-6 h-6 text-blue-500"></i></div>
+                            <h3 class="text-xl font-semibold">5-Day Delivery</h3>
+                        </div>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Our streamlined process delivers your complete website in just 5 business days, so you can start generating leads faster.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex-shrink-0 flex items-center justify-center mr-4"><i data-lucide="magnet" class="w-6 h-6 text-blue-500"></i></div>
+                            <h3 class="text-xl font-semibold">Lead Generation Focus</h3>
+                        </div>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Every element is strategically designed to convert visitors into leads with clear calls-to-action and trust-building elements.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex-shrink-0 flex items-center justify-center mr-4"><i data-lucide="shield-check" class="w-6 h-6 text-blue-500"></i></div>
+                            <h3 class="text-xl font-semibold">SEO Built-In</h3>
+                        </div>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">Your website is optimized for local search from day one, helping your business appear in Google searches for your services.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex-shrink-0 flex items-center justify-center mr-4"><i data-lucide="wrench" class="w-6 h-6 text-blue-500"></i></div>
+                            <h3 class="text-xl font-semibold">Service Business Specialists</h3>
+                        </div>
+                        <p class="text-[var(--text-secondary)] mb-4 flex-1">We exclusively work with service businesses, giving us deep insight into what works for roofing, HVAC, landscaping, and more.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <button class="interactive-btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">Ask</button>
+                            <button class="interactive-btn bg-purple-500/20 text-purple-400 hover:bg-purple-500/30">Explain</button>
+                            <button class="interactive-btn bg-green-500/20 text-green-400 hover:bg-green-500/30">Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- START: Our Process is Simple Section -->
+<div id="process-timeline" class="card max-w-4xl mx-auto">
+    <h3 class="text-2xl font-bold text-center mb-8">Our Process is Simple</h3>
+    <div class="relative">
+        <!-- Timeline line for desktop -->
+        <div class="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-[var(--border-color)] hidden md:block" aria-hidden="true"></div>
+
+        <div class="space-y-12">
+            <!-- Step 1 -->
+            <div class="md:flex items-center md:space-x-8 relative">
+                <div class="md:w-1/2 md:text-right">
+                    <div class="flex items-center justify-center md:justify-end mb-2 md:mb-0">
+                        <div class="md:order-2 text-center">
+                            <h4 class="text-lg font-semibold">DISCOVERY CALL</h4>
+                            <p class="text-[var(--text-secondary)]">We learn about your business, goals, and what sets you apart from competitors.</p>
+                        </div>
+                        <div class="md:order-1 bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mx-4">1</div>
+                    </div>
+                </div>
+                <div class="hidden md:block w-1/2"></div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="md:flex items-center md:space-x-8 relative">
+                <div class="hidden md:block w-1/2"></div>
+                <div class="md:w-1/2 md:text-left">
+                     <div class="flex items-center justify-center md:justify-start mb-2 md:mb-0">
+                        <div class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mx-4">2</div>
+                        <div class="text-center">
+                            <h4 class="text-lg font-semibold">DESIGN & DEVELOPMENT</h4>
+                            <p class="text-[var(--text-secondary)]">Our team creates your custom website with a focus on lead generation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="md:flex items-center md:space-x-8 relative">
+                <div class="md:w-1/2 md:text-right">
+                    <div class="flex items-center justify-center md:justify-end mb-2 md:mb-0">
+                        <div class="md:order-2 text-center">
+                            <h4 class="text-lg font-semibold">REVIEW & REFINEMENT</h4>
+                            <p class="text-[var(--text-secondary)]">You review the site and we make any necessary adjustments.</p>
+                        </div>
+                        <div class="md:order-1 bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mx-4">3</div>
+                    </div>
+                </div>
+                <div class="hidden md:block w-1/2"></div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="md:flex items-center md:space-x-8 relative">
+                <div class="hidden md:block w-1/2"></div>
+                <div class="md:w-1/2 md:text-left">
+                    <div class="flex items-center justify-center md:justify-start mb-2 md:mb-0">
+                        <div class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mx-4">4</div>
+                        <div class="text-center">
+                            <h4 class="text-lg font-semibold">LAUNCH</h4>
+                            <p class="text-[var(--text-secondary)]">Your new website goes live and starts generating leads for your business.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Our Process is Simple Section -->
+        </section>
+        
+       
+
+        <!-- User Reviews Section -->
+        <section id="reviews" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Client Reviews</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-[var(--text-secondary)] mt-4">See what our clients say about our service</p>
+                </div>
+                <div id="reviews-container" class="min-h-[250px]">
+                    <!-- Reviews will be dynamically injected here -->
+                </div>
+                <div class="card max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-4">Share Your Experience</h3>
+                    <form id="review-form" class="space-y-4" required>
+                        <div class="star-rating" id="star-rating-container">
+                            <!-- Stars will be dynamically generated here -->
+                        </div>
+                        <input type="hidden" name="rating" id="rating-value" value="0" required>
+                        <input type="text" name="name" placeholder="Full Name" class="form-input" required>
+                        <input type="text" name="company" placeholder="Company / Project (Optional)" class="form-input">
+                        <textarea name="review" rows="4" placeholder="Tell us about your experience..." class="form-input" required></textarea>
+                        <button type="submit" class="btn-primary w-full">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Projects Section -->
+        <section id="special-projects" class="py-20 bg-[var(--bg-card)] border-y border-[var(--border-color)]">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="card max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Beyond Our Niche: Custom Tech Solutions</h2>
+                    <p class="text-[var(--text-secondary)] text-lg max-w-3xl mx-auto mb-8">
+                        While we specialize in websites for service businesses, our expertise doesn't stop there. On special occasions, we partner with clients on unique digital projects. If you need a custom web application, a specialized e-commerce platform, or other advanced web development services, we're ready to build the custom solution your vision requires.
+                    </p>
+                    <a href="#contact" class="btn-secondary self-center">Discuss a Custom Project</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold">Get Your Website within 5 Days</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-[var(--text-secondary)] mt-4">Fill out the form below to start the conversation. We'll get back to you within 24 hours.</p>
+                </div>
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <div class="lg:w-2/3">
+                        <form id="contact-form" class="space-y-4" required>
+                            <input type="text" placeholder="Full Name" class="form-input" required>
+                            <input type="email" placeholder="Email Address" class="form-input" required>
+                            <input type="tel" placeholder="Phone Number" class="form-input">
+                            <select class="form-input" required>
+                                <option value="" disabled selected>Select a business type</option>
+                                <option value="Roofing">Roofing</option>
+                                <option value="HVAC">HVAC</option>
+                                <option value="Landscaping">Landscaping</option>
+                                <option value="Remodeling">Remodeling</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="space-y-2">
+                                <label for="budget-range" class="block text-sm font-medium text-[var(--text-secondary)]">Budget Range: <span id="budget-value" class="font-bold text-[var(--text-primary)]">$2500</span></label>
+                                <input type="range" id="budget-range" min="500" max="5000" step="100" value="2500" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            </div>
+                            <textarea rows="4" placeholder="Project Details" class="form-input" required></textarea>
+                            <button type="submit" class="btn-primary w-full">Get Started</button>
+                        </form>
+                    </div>
+                    <div class="lg:w-1/3 space-y-8">
+                        <div class="card">
+                            <h3 class="text-xl font-semibold mb-4">Contact Information</h3>
+                            <div class="space-y-3">
+                                <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 mr-3"></i> trixeltechnologies@gmail.com</p>
+                                <p class="flex items-center"><i data-lucide="phone" class="w-5 h-5 mr-3"></i> (234) 704-299-8527</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <i data-lucide="message-circle" class="w-8 h-8 text-blue-500 mb-4"></i>
+                            <p class="italic text-[var(--text-secondary)]">"I highly recommend Trixel, their ability to truly listen and understand a client's needs sets them apart..."</p>
+                            <p class="font-semibold mt-4">- Wesley Estrella</p>
+                            <p class="text-sm text-[var(--text-secondary)]">Spotlight Management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--bg-card)] border-t border-[var(--border-color)] py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-[var(--text-secondary)]">
+            <a href="#" class="text-2xl font-bold text-[var(--text-primary)]">Trixel<span class="text-blue-500">.</span>Tech</a>
+            <p class="mt-2 text-sm">Websites That Win Clients — Delivered Within 5 Days.</p>
+            <div class="flex justify-center space-x-6 my-6">
+                <a href="#home" class="hover:text-blue-500">Home</a>
+                <a href="#services" class="hover:text-blue-500">Services</a>
+                <a href="#portfolio" class="hover:text-blue-500">Portfolio</a>
+                <a href="#why-us" class="hover:text-blue-500">Why Us</a>
+            </div>
+            <div class="mb-6">
+                <h4 class="font-semibold text-text-primary mb-2">We Serve</h4>
+                <p class="text-sm">Roofing Companies • HVAC Contractors • Landscaping • Remodeling</p>
+            </div>
+            <p class="text-sm mt-6">© 2025 Trixel Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-4 right-4 z-40 flex flex-col items-center space-y-2">
+        <!-- AI Orb -->
+        <div id="ai-orb-container" class="relative hidden">
+             <button id="ai-orb" class="w-14 h-14 rounded-full flex items-center justify-center text-white transition-all duration-300" style="background: linear-gradient(135deg, #3B82F6, #2563EB); box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);">
+                <i data-lucide="mic" class="w-7 h-7"></i>
+            </button>
+            <button id="cancel-ai-orb" class="absolute -top-1 -right-1 w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        <!-- Main AI Chat Toggle -->        
+<button id="ai-chat-toggle" class="w-12 h-12 rounded-full flex items-center justify-center text-white" style="background: linear-gradient(135deg, #3B82F6, #2563EB);">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>
+        </button>
+        <!-- Audio Toggle -->
+        <button id="audio-toggle" class="w-12 h-12 rounded-full flex items-center justify-center text-white" style="background: linear-gradient(135deg, #3B82F6, #2563EB);">
+            <i data-lucide="volume-2" class="w-6 h-6"></i>
+        </button>
+        <!-- Back to Top -->
+       <button id="back-to-top" class="w-12 h-12 rounded-full flex items-center justify-center text-white" style="background: linear-gradient(135deg, #3B82F6, #2563EB);"><i data-lucide="arrow-up" class="w-6 h-6"></i></button>
+    </div>
+
+    <!-- Audio Players -->
+    <audio id="tour-audio-player" preload="none" style="display: none;"></audio>
+    <audio id="bg-music-player" preload="auto" loop style="display: none;"></audio>
+
+    <!-- Audio Control Panel -->
+    <div id="audio-control-panel" class="fixed bottom-20 right-4 z-50 w-64 bg-[var(--bg-card)] rounded-xl shadow-2xl p-4 hidden flex-col space-y-4" style="border: 1px solid var(--border-color);">
+        <div class="flex justify-between items-center">
+            <h4 class="font-semibold">Audio Controls</h4>
+            <button id="close-audio-panel-btn" class="p-1 rounded-full hover:bg-gray-700/50"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+        <div>
+            <p class="text-sm text-[var(--text-secondary)] mb-1">Background Music</p>
+            <div class="flex items-center justify-between">
+                <button id="prev-track-btn" class="p-2"><i data-lucide="skip-back"></i></button>
+                <button id="play-pause-btn" class="p-2"><i data-lucide="pause"></i></button>
+                <button id="next-track-btn" class="p-2"><i data-lucide="skip-forward"></i></button>
+            </div>
+        </div>
+        <div>
+            <p class="text-sm text-[var(--text-secondary)] mb-1">Volume</p>
+            <div class="flex items-center gap-2">
+                <i data-lucide="volume-1"></i>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5" class="w-full">
+                <i data-lucide="volume-2"></i>
+            </div>
+        </div>
+    </div>
+
+   <!-- AI Chat Widget -->
+<div id="ai-chat-widget" class="fixed bottom-20 right-4 left-4 sm:left-auto z-50 h-[60vh] max-h-[450px] sm:w-full max-w-[400px] rounded-xl glass-morphism shadow-2xl hidden flex-col" style="transform: translateY(20px); opacity: 0;">
+  
+    <div class="p-3 border-b border-[var(--border-color)] flex justify-between items-center flex-shrink-0">
+       <!-- Chat Header with Icon -->
+        <div class="flex items-center gap-2">
+            <i data-lucide="life-buoy" class="w-5 h-5 text-blue-400"></i>
+            <h4 class="font-semibold">Trixel AI Assistant</h4>
+        </div>
+        <div class="flex items-center gap-1">
+            <button id="clear-chat-btn" class="p-1 rounded-full hover:bg-gray-700/50" title="Clear Conversation">
+                <i data-lucide="trash-2" class="w-5 h-5"></i>
+            </button>
+            <button id="close-chat-btn" class="p-1 rounded-full hover:bg-gray-700/50">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        </div>
+    </div>
+    <div id="chat-messages" class="p-4 flex-1 overflow-y-auto">
+        <!-- Messages will be dynamically injected here -->
+    </div><!-- Chat Input Area -->
+    <div class="p-3 border-t border-[var(--border-color)] flex-shrink-0">
+        <form id="chat-input-form" class="flex items-center gap-2">
+            <input type="text" id="chat-input" placeholder="Type your message..." class="form-input text-sm flex-1 bg-transparent" required autocomplete="off">
+         <!-- Chat send button (INLINE SVG to guarantee rendering) -->
+<button type="submit"
+        id="chat-send-btn"
+        aria-label="Send message"
+        class="w-10 h-10 rounded-full flex items-center justify-center text-white flex-shrink-0 btn-primary p-0">
+    <!-- Inline 'send / paper-plane' SVG (uses stroke=currentColor so it inherits the button color) -->
+    <!-- Short, clear comment: inline svg ensures icon always displays (no library replacement needed) -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         class="w-5 h-5"
+         width="20" height="20" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" role="img">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </svg>
+</button>
+        </form>
+    </div>
+</div>
+
+ <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    
+  <script src = "script.js" defer> </script>
+</body>
+</html>
